@@ -45,4 +45,10 @@ explore: payment {
     sql_on: ${inventory.store_id} = ${store.store_id} ;;
   }
 
+  join: staff {
+    type: inner
+    relationship: many_to_one
+    sql_on: ${store.store_id} = ${staff.store_id} ;;
+  }
+
 }
