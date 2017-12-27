@@ -21,3 +21,5 @@ view: sales_by_store {
     drill_fields: []
   }
 }
+
+explore: sales_by_store {hidden: yes}

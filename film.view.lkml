@@ -90,3 +90,5 @@ view: film {
     drill_fields: [film_id]
   }
 }
+
+explore: film {hidden: yes}
