@@ -29,7 +29,7 @@ explore: payment {
 
   join: inventory {
     type: inner
-    relationship: many_to_many
+    relationship: one_to_one
     sql_on: ${rental.inventory_id} = ${inventory.inventory_id} ;;
   }
 
