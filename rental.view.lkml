@@ -60,6 +60,16 @@ view: rental {
     sql: ${TABLE}.return_date ;;
   }
 
+  dimension: late_fee_incurred {
+    type: yesno
+    sql: DATEDIFF(${return_date}, ${rental_date}) > 3 ;;
+  }
+
+  dimension: 1st_week_late {
+    type: date
+    sql: CASE WHEN ${late_fee_incurred} THEN DATE_ADD(${rental_date}, INTERVAL 3 DAY) ELSE NULL END ;;
+  }
+
   dimension: staff_id {
     type: number
     sql: ${TABLE}.staff_id ;;

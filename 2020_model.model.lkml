@@ -47,7 +47,7 @@ explore: payment {
 
   join: staff {
     type: inner
-    relationship: many_to_one
+    relationship: one_to_many
     sql_on: ${store.store_id} = ${staff.store_id} ;;
   }
 

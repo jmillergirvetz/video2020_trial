@@ -12,10 +12,27 @@ view: payment {
     sql: ${TABLE}.amount  ;;
   }
 
-  measure: total_amount {
+  measure: total_rev_no_fee {
+    hidden: yes
     type: sum
     value_format_name: usd
     sql: ${amount} ;;
+  }
+
+  measure: total_fees {
+    type: sum
+    value_format_name: usd
+    sql: 3 ;;
+    filters: {
+      field: rental.late_fee_incurred
+      value: "Yes"
+    }
+  }
+
+  measure: total_revenue {
+    type: number
+    value_format_name: usd
+    sql: ${total_rev_no_fee} + ${total_fees} ;;
   }
 
   dimension: customer_id {
