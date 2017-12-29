@@ -70,6 +70,21 @@ view: rental {
     sql: CASE WHEN ${late_fee_incurred} THEN DATE_ADD(${rental_date}, INTERVAL 3 DAY) ELSE NULL END ;;
   }
 
+  dimension: 1st_week_late_10_day_grace {
+    type: date
+    sql: CASE WHEN ${late_fee_incurred} THEN DATE_ADD(${rental_date}, INTERVAL 10 DAY) ELSE NULL END ;;
+  }
+
+  dimension: return_late_fee_eligble {
+    type: yesno
+    sql: (${1st_week_late} < ${return_date}) AND (${return_date} <= ${1st_week_late_10_day_grace});;
+  }
+
+  dimension: late_fee_wash {
+    type: yesno
+    sql: ${late_fee_wash_eligible.wash_late_fee_customer_id} IS NOT NULL ;;
+  }
+
   dimension: staff_id {
     type: number
     sql: ${TABLE}.staff_id ;;

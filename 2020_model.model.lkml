@@ -51,4 +51,11 @@ explore: payment {
     sql_on: ${store.store_id} = ${staff.store_id} ;;
   }
 
+  join: late_fee_wash_eligible {
+    view_label: "Rental"
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${rental.rental_id} = ${late_fee_wash_eligible.wash_rental_id} ;;
+  }
+
 }

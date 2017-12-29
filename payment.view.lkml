@@ -29,10 +29,20 @@ view: payment {
     }
   }
 
+  measure: total_washed_late_fees {
+    type: sum
+    value_format_name: usd
+    sql: 3 ;;
+    filters: {
+      field: rental.late_fee_wash
+      value: "Yes"
+    }
+  }
+
   measure: total_revenue {
     type: number
     value_format_name: usd
-    sql: ${total_rev_no_fee} + ${total_fees} ;;
+    sql: ${total_rev_no_fee} + ${total_fees} - ${total_washed_late_fees} ;;
   }
 
   dimension: customer_id {
