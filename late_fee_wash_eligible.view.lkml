@@ -1,23 +1,6 @@
 view: late_fee_wash_eligible {
   derived_table: {
-    sql: /*
-      SELECT
-        customer.customer_id  AS `customer.customer_id`,
-        rental.rental_id  AS `rental.rental_id`,
-        DATE(rental.rental_date ) AS `rental.rental_date`,
-        DATE(CASE WHEN (DATEDIFF((DATE(rental.return_date )), (DATE(rental.rental_date ))) > 3) THEN DATE_ADD((DATE(rental.rental_date )), INTERVAL 3 DAY) ELSE NULL END ) AS `rental.1st_week_late`,
-        DATE(CASE WHEN (DATEDIFF((DATE(rental.return_date )), (DATE(rental.rental_date ))) > 3) THEN DATE_ADD((DATE(rental.rental_date )), INTERVAL 10 DAY) ELSE NULL END ) AS `rental.1st_week_late_10_day_grace`,
-        DATE(rental.return_date ) AS `rental.return_date`
-      FROM sakila.payment  AS payment
-      INNER JOIN sakila.rental  AS rental ON payment.rental_id = rental.rental_id
-      LEFT JOIN sakila.customer  AS customer ON payment.customer_id = customer.customer_id
-
-      WHERE (((DATE(CASE WHEN (DATEDIFF((DATE(rental.return_date )), (DATE(rental.rental_date ))) > 3) THEN DATE_ADD((DATE(rental.rental_date )), INTERVAL 3 DAY) ELSE NULL END )) < (DATE(rental.return_date ))) AND ((DATE(rental.return_date )) <= (DATE(CASE WHEN (DATEDIFF((DATE(rental.return_date )), (DATE(rental.rental_date ))) > 3) THEN DATE_ADD((DATE(rental.rental_date )), INTERVAL 10 DAY) ELSE NULL END ))))
-      */
-
-
-
-
+    sql:
       /* returns the elgible late fee rentals that don't have a return date within the first week after after the 3 day period in which a late fee is incurred | */
         SELECT
           rental.customer_id  AS `rental.customer_id`,
