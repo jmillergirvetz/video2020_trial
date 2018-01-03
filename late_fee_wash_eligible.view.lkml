@@ -4,7 +4,7 @@ view: late_fee_wash_eligible {
       /* returns the elgible late fee rentals that don't have a return date within the first week after after the 3 day period in which a late fee is incurred | */
         SELECT
           rental.customer_id  AS `rental.customer_id`,
-          late_fee_wash_eligible.`rental.rental_id`  AS `late_fee_wash_eligible.rental_rental_id`,
+          late_fee_wash_eligible.`rental.rental_id`  AS late_fee_wash_eligible_rental_rental_id,
           COUNT(rental.rental_id ) AS `rental.count`
         FROM
             (SELECT
@@ -31,7 +31,7 @@ view: late_fee_wash_eligible {
         HAVING COUNT(rental.rental_id ) > 0
       ;;
     datagroup_trigger: 2020_customer_facts
-    indexes: ["wash_rental_id"]
+    indexes: ["late_fee_wash_eligible_rental_rental_id"]
   }
 
   measure: count_washed_late_fees {
@@ -47,7 +47,7 @@ view: late_fee_wash_eligible {
 #     hidden: yes
     primary_key: yes
     type: number
-    sql: ${TABLE}.`late_fee_wash_eligible.rental_rental_id` ;;
+    sql: ${TABLE}.late_fee_wash_eligible_rental_rental_id ;;
   }
 
 #   dimension: wash_rental_counts {

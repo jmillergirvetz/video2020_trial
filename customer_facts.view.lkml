@@ -1,7 +1,7 @@
 view: customer_facts {
   derived_table: {
     sql: SELECT
-        customer.customer_id  AS `customer.customer_id`,
+        customer.customer_id  AS customer_customer_id,
         MAX(DATE(rental.rental_date )) AS `most_recent_rental.rental_date`,
         MIN(DATE(customer.create_date )) AS `customer.create_date`,
         (COALESCE(SUM(payment.amount ), 0)) + (COALESCE(SUM(CASE WHEN DATEDIFF((DATE(rental.return_date )), (DATE(rental.rental_date ))) > 3  THEN 3  ELSE NULL END), 0)) - (COALESCE(SUM(CASE WHEN (late_fee_wash_eligible.`rental.customer_id`) IS NOT NULL  THEN 3  ELSE NULL END), 0))  AS `payment.total_revenue`,
@@ -17,14 +17,14 @@ view: customer_facts {
       GROUP BY 1
        ;;
     datagroup_trigger: 2020_customer_facts
-    indexes: ["customer_id"]
+    indexes: ["customer_customer_id"]
   }
 
   dimension: customer_id {
     hidden: yes
     primary_key: yes
     type: string
-    sql: ${TABLE}.`customer.customer_id` ;;
+    sql: ${TABLE}.customer_customer_id ;;
   }
 
   dimension: most_recent_rental_rental_date {
