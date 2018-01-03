@@ -8,12 +8,12 @@ view: customer_facts {
         COALESCE(SUM(CASE WHEN DATEDIFF((DATE(rental.return_date )), (DATE(rental.rental_date ))) > 3  THEN 3  ELSE NULL END), 0) AS `payment.total_fees`,
         COALESCE(SUM(CASE WHEN (late_fee_wash_eligible.`rental.customer_id`) IS NOT NULL  THEN 3  ELSE NULL END), 0) AS `payment.total_washed_late_fees`,
         COUNT(*) AS `rental.count`,
-        COUNT(DISTINCT late_fee_wash_eligible.`late_fee_wash_eligible.rental_rental_id` ) AS `late_fee_wash_eligible.count_washed_late_fees`
+        COUNT(DISTINCT late_fee_wash_eligible.late_fee_wash_eligible_rental_rental_id ) AS `late_fee_wash_eligible.count_washed_late_fees`
       FROM sakila.payment  AS payment
       INNER JOIN sakila.rental  AS rental ON payment.rental_id = rental.rental_id
       LEFT JOIN sakila.customer  AS customer ON payment.customer_id = customer.customer_id
       LEFT JOIN ${late_fee_wash_eligible.SQL_TABLE_NAME} AS late_fee_wash_eligible
-      ON rental.rental_id = (late_fee_wash_eligible.`late_fee_wash_eligible.rental_rental_id`)
+      ON rental.rental_id = late_fee_wash_eligible.late_fee_wash_eligible_rental_rental_id
       GROUP BY 1
        ;;
     datagroup_trigger: 2020_customer_facts
@@ -27,7 +27,7 @@ view: customer_facts {
     sql: ${TABLE}.customer_customer_id ;;
   }
 
-  dimension: most_recent_rental_rental_date {
+  dimension: most_recent_rental_date {
     type: date
     sql: ${TABLE}.`most_recent_rental.rental_date` ;;
   }
@@ -35,6 +35,11 @@ view: customer_facts {
   dimension: customer_create_date {
     type: date
     sql: ${TABLE}.`customer.create_date` ;;
+  }
+
+  dimension: months_since_creation {
+    type: number
+    sql: TIMESTAMPDIFF(MONTH, ${customer_create_date}, ${most_recent_rental_date}) ;;
   }
 
   dimension: payment_total_revenue {
