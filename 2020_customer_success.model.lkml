@@ -12,6 +12,6 @@ explore: customer_success {
   view_name: payment
 
   join: staff {
-    fields: [] # staff.store_id]
+    fields: []
   }
 }
