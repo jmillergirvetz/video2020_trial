@@ -1,9 +1,6 @@
 connection: "video_store"
 
-# include all the views
 include: "*.view"
-
-# include all the dashboards
 include: "*.dashboard"
 
 datagroup: 2020_model_default_datagroup {
