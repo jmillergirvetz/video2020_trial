@@ -30,6 +30,6 @@ explore: revenue {
   join: customer_facts {
     type: inner
     relationship: one_to_one
-    sql_on: ${customer_extends.customer_id} = ${customer_facts.customer_customer_id} ;;
+    sql_on: ${customer_extends.customer_id} = ${customer_facts.customer_id} ;;
   }
 }

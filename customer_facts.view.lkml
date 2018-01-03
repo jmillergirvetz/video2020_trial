@@ -18,7 +18,7 @@ view: customer_facts {
        ;;
   }
 
-  dimension: customer_customer_id {
+  dimension: customer_id {
     hidden: yes
     primary_key: yes
     type: string
@@ -39,6 +39,12 @@ view: customer_facts {
     type: number
     value_format_name: usd
     sql: ${TABLE}.`payment.total_revenue` ;;
+  }
+
+  measure: avg_lifetime_revenue {
+    type: average
+    value_format_name: usd
+    sql: ${payment_total_revenue} ;;
   }
 
   dimension: payment_total_fees {
