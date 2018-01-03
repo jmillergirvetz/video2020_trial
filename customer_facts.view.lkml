@@ -37,9 +37,9 @@ view: customer_facts {
     sql: ${TABLE}.`customer.create_date` ;;
   }
 
-  dimension: months_since_creation {
+  dimension: num_rental_months_from_creation {
     type: number
-    sql: TIMESTAMPDIFF(MONTH, ${customer_create_date}, ${most_recent_rental_date}) ;;
+    sql: TIMESTAMPDIFF(MONTH, ${rental.rental_date}, ${customer_create_date}) ;;
   }
 
   dimension: payment_total_revenue {
