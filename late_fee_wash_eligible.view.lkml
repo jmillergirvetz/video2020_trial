@@ -30,6 +30,8 @@ view: late_fee_wash_eligible {
         /* since there will be fanout in the date join above (incidcating that there were multiple rentals within the wash grace period), the late fee flag will be any customers who have of 0 count of rentals within that period | anything above 0 will have their late fee forgiven */
         HAVING COUNT(rental.rental_id ) > 0
       ;;
+    datagroup_trigger: 2020_customer_facts
+    indexes: ["wash_rental_id"]
   }
 
   measure: count_washed_late_fees {

@@ -16,6 +16,8 @@ view: customer_facts {
       ON rental.rental_id = (late_fee_wash_eligible.`late_fee_wash_eligible.rental_rental_id`)
       GROUP BY 1
        ;;
+    datagroup_trigger: 2020_customer_facts
+    indexes: ["customer_id"]
   }
 
   dimension: customer_id {

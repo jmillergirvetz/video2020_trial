@@ -4,14 +4,16 @@ include: "*.view"
 include: "*.dashboard"
 
 datagroup: 2020_model_default_datagroup {
-  # sql_trigger: SELECT MAX(id) FROM etl_log;;
   max_cache_age: "1 hour"
+}
+
+datagroup: 2020_customer_facts {
+  sql_trigger: SELECT CURDATE() ;;
 }
 
 persist_with: 2020_model_default_datagroup
 
 explore: payment {
-#   hidden: yes
 
   join: rental {
     type: inner
