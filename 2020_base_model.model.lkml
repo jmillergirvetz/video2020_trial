@@ -14,6 +14,7 @@ datagroup: 2020_model_default_datagroup {
 persist_with: 2020_model_default_datagroup
 
 explore: payment {
+#   hidden: yes
 
   join: rental {
     type: inner
