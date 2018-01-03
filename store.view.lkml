@@ -8,6 +8,7 @@ view: store {
   }
 
   dimension: address_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.address_id ;;
   }

@@ -13,6 +13,7 @@ view: customer {
   }
 
   dimension: address_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.address_id ;;
   }
@@ -47,6 +48,7 @@ view: customer {
   }
 
   dimension_group: last_update {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -61,7 +63,8 @@ view: customer {
   }
 
   dimension: store_id {
-    type: yesno
+    hidden: yes
+    type: number
     sql: ${TABLE}.store_id ;;
   }
 

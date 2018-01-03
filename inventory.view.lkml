@@ -2,17 +2,20 @@ view: inventory {
   sql_table_name: sakila.inventory ;;
 
   dimension: inventory_id {
+    hidden: yes
     primary_key: yes
     type: number
     sql: ${TABLE}.inventory_id ;;
   }
 
   dimension: film_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.film_id ;;
   }
 
   dimension_group: last_update {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -27,11 +30,14 @@ view: inventory {
   }
 
   dimension: store_id {
-    type: yesno
+    hidden: yes
+    type: number
     sql: ${TABLE}.store_id ;;
   }
 
-  measure: count {
+  measure: inventory_count {
+    description: "Number of films in inventory"
+    view_label: "Rental"
     type: count
     drill_fields: [inventory_id]
   }

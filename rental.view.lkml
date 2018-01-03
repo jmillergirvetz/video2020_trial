@@ -14,6 +14,7 @@ view: rental {
   }
 
   dimension: inventory_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.inventory_id ;;
   }
@@ -89,6 +90,7 @@ view: rental {
   }
 
   dimension: staff_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.staff_id ;;
   }

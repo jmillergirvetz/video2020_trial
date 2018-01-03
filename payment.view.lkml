@@ -52,6 +52,7 @@ view: payment {
   }
 
   dimension_group: last_update {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -81,13 +82,13 @@ view: payment {
 
   dimension: rental_id {
     type: number
-    # hidden: yes
+    hidden: yes
     sql: ${TABLE}.rental_id ;;
   }
 
   dimension: staff_id {
-    type: yesno
-    # hidden: yes
+    type: number
+    hidden: yes
     sql: ${TABLE}.staff_id ;;
   }
 
