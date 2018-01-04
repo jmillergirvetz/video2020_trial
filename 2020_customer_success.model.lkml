@@ -10,6 +10,10 @@ explore: customer_success {
   hidden: no
   extends: [payment]
   view_name: payment
+  access_filter: {
+    field: store.store_id
+    user_attribute: store_id
+  }
 
   join: staff {
     fields: []
